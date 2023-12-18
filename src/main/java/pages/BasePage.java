@@ -1,6 +1,6 @@
-package com.testcrewtask.pages;
+package pages;
 
-import com.testcrewtask.utilities.BrowserActions;
+import utilities.BrowserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

@@ -1,6 +1,6 @@
-package com.testcrewtask.pages;
+package pages;
 
-import com.testcrewtask.utilities.BrowserActions;
+import utilities.BrowserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,17 +16,29 @@ public class ChooseYourPlanPage extends BasePage {
     private final By litePlanCurrencyPerMonth=By.xpath("//div[@id='currency-lite' or @id='currency-لايت']/i");
     private final By classicPlanCurrencyPerMonth=By.xpath("//div[@id='currency-classic' or @id='currency-الأساسية']/i");
     private final By premiumPlanCurrencyPerMonth=By.xpath("//div[@id='currency-premium' or @id='currency-بريميوم']/i");
+    private final By litePlanDiscoveryStatus=By.xpath("(//img[@src='https://cdn-stg.jawwy.tv/28/New Design/mlp-discovery-horizontal.svg']//parent::div[1])[1]/following-sibling::div/div[1]");
+    private final By classicPlanDiscoveryStatus=By.xpath("(//img[@src='https://cdn-stg.jawwy.tv/28/New Design/mlp-discovery-horizontal.svg']//parent::div[1])[1]/following-sibling::div/div[2]");
+    private final By premiumPlanDiscoveryStatus=By.xpath("(//img[@src='https://cdn-stg.jawwy.tv/28/New Design/mlp-discovery-horizontal.svg']//parent::div[1])[1]/following-sibling::div/div[3]");
+    private final By litePlanFreePeriod=By.xpath("//div[text()='Free trial']/following-sibling::div/div[1]");
+    private final By classicPlanFreePeriod=By.xpath("//div[text()='Free trial']/following-sibling::div/div[2]");
+    private final By premiumPlanFreePeriod=By.xpath("//div[text()='Free trial']/following-sibling::div/div[3]");
 
-    public ChooseYourPlanPage(WebDriver driver) {
+    public ChooseYourPlanPage(WebDriver driver) throws Exception {
         super(driver);
         waitUntilHomePageIsLoaded();
     }
 
-    public void waitUntilHomePageIsLoaded(){
+    public void waitUntilHomePageIsLoaded() throws Exception {
         BrowserActions.waitUntilWebElementIsVisible(languageBtn, this.driver);
     }
 
     /************************ Choose Your Plan Table Functions *********************************/
+
+    public PaymentMethodPage clickOnPlanType(String planName) throws Exception {
+        By ele=By.xpath("//strong[text()='"+planName+"']/following-sibling::a");
+        BrowserActions.clickOnWebElement(ele,this.driver);
+        return new PaymentMethodPage(this.driver);
+    }
 
     public String getLitePlanText() throws Exception {
         return BrowserActions.getWebElementText(litePlanHeader,this.driver);
@@ -65,6 +77,30 @@ public class ChooseYourPlanPage extends BasePage {
     public String getPremiumPlanCurrency() throws Exception {
         String result=BrowserActions.getWebElementText(premiumPlanCurrencyPerMonth,this.driver);
         return result.substring(0,result.indexOf('/'));
+    }
+
+    public String getLitePlanDiscoveryStatus() throws Exception {
+        return BrowserActions.getWebElementText(litePlanDiscoveryStatus,this.driver);
+    }
+
+    public String getClassicPlanDiscoveryStatus() throws Exception {
+        return BrowserActions.getWebElementText(classicPlanDiscoveryStatus,this.driver);
+    }
+
+    public String getPremiumPlanDiscoveryStatus() throws Exception {
+        return BrowserActions.getWebElementText(premiumPlanDiscoveryStatus,this.driver);
+    }
+
+    public String getLitePlanFreePeriod() throws Exception {
+        return BrowserActions.getWebElementText(litePlanFreePeriod,this.driver);
+    }
+
+    public String getClassicPlanFreePeriod() throws Exception {
+        return BrowserActions.getWebElementText(classicPlanFreePeriod,this.driver);
+    }
+
+    public String getPremiumPlanFreePeriod() throws Exception {
+        return BrowserActions.getWebElementText(premiumPlanFreePeriod,this.driver);
     }
 
 
